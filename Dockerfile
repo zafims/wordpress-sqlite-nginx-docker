@@ -19,7 +19,7 @@ RUN rm sqlite-plugin.zip
 RUN cp ${DOCUMENT_ROOT}/wp-content/plugins/sqlite-integration/db.php ${DOCUMENT_ROOT}/wp-content
 RUN cp ${DOCUMENT_ROOT}/wp-config-sample.php ${DOCUMENT_ROOT}/wp-config.php
 RUN mkdir -p /var/wordpress/database 
-RUN sed -i "s/<?php/<?php\ndefine('DB_DIR', '/var/wordpress/database/');/" ${DOCUMENT_ROOT}/wp-config.php
+RUN sed -i "s/<?php/<?php\ndefine('DB_DIR', '\/var\/wordpress\/database\/');/" ${DOCUMENT_ROOT}/wp-config.php
 
 # nginx config
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
