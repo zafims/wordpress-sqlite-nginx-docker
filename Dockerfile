@@ -21,8 +21,8 @@ RUN cp ${DOCUMENT_ROOT}/wp-config-sample.php ${DOCUMENT_ROOT}/wp-config.php
 RUN mkdir -p /var/wordpress/database 
 RUN sed -i "s/<?php/<?php\ndefine('DB_DIR', '\/var\/wordpress\/database\/');/" ${DOCUMENT_ROOT}/wp-config.php
 
-RUN cp -rvf ${DOCUMENT_ROOT}/wp-content/plugins/ ${DOCUMENT_ROOT}/wp-content/pkg-plugins/
-RUN cp -rvf ${DOCUMENT_ROOT}/wp-content/themes/ ${DOCUMENT_ROOT}/wp-content/pkg-themes/
+RUN cp -rf ${DOCUMENT_ROOT}/wp-content/plugins/ ${DOCUMENT_ROOT}/wp-content/pkg-plugins/
+RUN cp -rf ${DOCUMENT_ROOT}/wp-content/themes/ ${DOCUMENT_ROOT}/wp-content/pkg-themes/
 
 # nginx config
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
