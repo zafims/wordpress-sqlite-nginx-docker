@@ -21,6 +21,9 @@ RUN cp ${DOCUMENT_ROOT}/wp-config-sample.php ${DOCUMENT_ROOT}/wp-config.php
 RUN mkdir -p /var/wordpress/database 
 RUN sed -i "s/<?php/<?php\ndefine('DB_DIR', '\/var\/wordpress\/database\/');/" ${DOCUMENT_ROOT}/wp-config.php
 
+RUN cp -rvf ${DOCUMENT_ROOT}/wp-content/plugins/ ${DOCUMENT_ROOT}/wp-content/pkg-plugins/
+RUN cp -rvf ${DOCUMENT_ROOT}/wp-content/themes/ ${DOCUMENT_ROOT}/wp-content/pkg-themes/
+
 # nginx config
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
 RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 10m/" /etc/nginx/nginx.conf
@@ -43,5 +46,5 @@ RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 EXPOSE 80
 EXPOSE 443
 
-CMD service php5-fpm start && nginx
+CMD cp --no-clobber -vr ${DOCUMENT_ROOT}/wp-content/pkg-plugins/* ${DOCUMENT_ROOT}/wp-content/plugins/ && cp --no-clobber -vr ${DOCUMENT_ROOT}/wp-content/pkg-themes/* ${DOCUMENT_ROOT}/wp-content/themes/ && service php5-fpm start && nginx
     

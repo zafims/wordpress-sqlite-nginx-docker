@@ -8,8 +8,15 @@ This repository contains **Dockerfile** of Wordpress on Nginx using Sqlite inste
 
 ### Usage
 
-    mkdir -p /var/wordpress/database /var/wordpress/uploads    
-    docker run -d -p 3000:80 -v /var/wordpress/database:/var/wordpress/database -v /var/wordpress/uploads:/usr/share/nginx/html/wp-content/uploads zenozeng/wordpress-sqlite-nginx-docker    
+```
+mkdir -p /var/wordpress/database /var/wordpress/uploads /var/wordpress/plugins /var/wordpress/themes   
+docker run -d -p 3000:80 \
+    -v /var/wordpress/database:/var/wordpress/database \ 
+    -v /var/wordpress/uploads:/usr/share/nginx/html/wp-content/uploads \
+    -v /var/wordpress/themes:/usr/share/nginx/html/wp-content/themes \
+    -v /var/wordpress/plugins:/usr/share/nginx/html/wp-content/plugins \
+    zenozeng/wordpress-sqlite-nginx-docker
+```    
 
 After few seconds, open `http://<host>` to see the wordpress install page.
 
