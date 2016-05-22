@@ -1,5 +1,5 @@
 from nginx:latest
-MAINTAINER Dorward Villaruz <dorwardv@gmail.com>
+MAINTAINER Zeno Zeng <zenoofzeng@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
